@@ -13,7 +13,7 @@
 .View-Add-Button {
     width: 100px;
     height: 100px;
-    background-image: url('plus.svg');
+    background-image: url('../assets/plus.svg');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
