@@ -5,7 +5,32 @@ import SENNHEISER from "./temporaries/SENNHEISER.jpeg";
 import PowerBeatsPRO from "./temporaries/PowerBeatsPRO.jpeg";
 import 차이팟 from "./temporaries/차이팟.png";
 
-const presets: Preset[] = [
+import mechanic from "../static/기계식 키보드.json";
+import mouse from "../static/마우스.json";
+import macroMouse from "../static/매크로마우스.json";
+import macbookMouse from "../static/맥북 마우스.json";
+import unlinkMouse from "../static/무선마우스.json";
+import silentMouse from "../static/무소음 마우스.json";
+import bluetoothMouse from "../static/블루투스마우스.json";
+import officeKeyboard from "../static/사무용 키보드.json";
+import redLineKeyboard from "../static/적축키보드.json";
+import customKeyboard from "../static/커스텀 키보드.json";
+import keyboard from "../static/키보드.json";
+
+const jsons = [
+  mouse,
+  macroMouse,
+  macbookMouse,
+  unlinkMouse,
+  silentMouse,
+  bluetoothMouse,
+  officeKeyboard,
+  redLineKeyboard,
+  customKeyboard,
+  keyboard,
+];
+
+const typingPresets: Preset[] = [
   {
     name: "Preset1",
     content: {
@@ -87,30 +112,26 @@ const presets: Preset[] = [
       ],
     },
   },
-  {
-    name: "Preset2",
+  ...jsons.map((json) => ({
+    name: json.name,
     content: {
-      products: [],
-      data: [
-        {
-          category: "Image",
-          value: {},
-        },
-      ],
+      products: json.sheet.map(({ 상품명 }) => 상품명),
+      data: Object.keys(json.sheet[0]).map((category) => ({
+        category,
+        value: (json.sheet as Array<any>).reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur.상품명]:
+              cur[category as keyof (typeof mechanic.sheet)[number]],
+          }),
+          {},
+        ),
+      })) as Data,
+      // .filter(({ value }) =>
+      //   Object.values(value).every((v) => typeof v === "number"),
+      // ) as Data,
     },
-  },
-  {
-    name: "Preset3",
-    content: {
-      products: [],
-      data: [
-        {
-          category: "Image",
-          value: {},
-        },
-      ],
-    },
-  },
+  })),
 ];
 
-export default presets;
+export default typingPresets;
