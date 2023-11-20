@@ -32,7 +32,7 @@ const ControllerTable = ({
           [newName]: null,
         },
       },
-      ...amountData.map(amount => ({
+      ...amountData.map((amount) => ({
         ...amount,
         value: {
           ...amount.value,
@@ -47,15 +47,15 @@ const ControllerTable = ({
   const updateProduct =
     (product: string) => (e: ChangeEvent<HTMLInputElement>) => {
       const [image, ...amountData] = data;
-      const newProducts = products.filter(p => p !== product);
+      const newProducts = products.filter((p) => p !== product);
       const newData: Data = [
         image,
         ...amountData
-          .map(amount => {
+          .map((amount) => {
             delete amount.value[product];
             return amount;
           })
-          .map(amount => ({
+          .map((amount) => ({
             ...amount,
             value: {
               ...amount.value,
@@ -68,10 +68,10 @@ const ControllerTable = ({
 
   const deleteProduct = (product: string) => () => {
     const [image, ...amountData] = data;
-    const newProducts = products.filter(p => p !== product);
+    const newProducts = products.filter((p) => p !== product);
     const newData: Data = [
       image,
-      ...amountData.map(amount => {
+      ...amountData.map((amount) => {
         delete amount.value[product];
         return amount;
       }),
@@ -102,7 +102,7 @@ const ControllerTable = ({
       const [image, ...amountData] = data;
       const newData: Data = [
         image,
-        ...amountData.map(amount => ({
+        ...amountData.map((amount) => ({
           ...amount,
           [category]: e.target.value,
         })),
@@ -114,7 +114,7 @@ const ControllerTable = ({
     const [image, ...amountData] = data;
     const newData: Data = [
       image,
-      ...amountData.filter(amount => amount.category !== category),
+      ...amountData.filter((amount) => amount.category !== category),
     ];
     onUpdateDate(products, newData);
   };
@@ -125,7 +125,7 @@ const ControllerTable = ({
       const [image, ...amountData] = data;
       const newData: Data = [
         image,
-        ...amountData.map(amount => {
+        ...amountData.map((amount) => {
           if (amount.category === category) {
             return {
               ...amount,
@@ -155,7 +155,7 @@ const ControllerTable = ({
       }
       const reader = new FileReader();
       reader.readAsDataURL(file[0]);
-      reader.addEventListener("load", e => {
+      reader.addEventListener("load", (e) => {
         const [image, ...amountData] = data;
         const newData: Data = [
           {
@@ -178,9 +178,8 @@ const ControllerTable = ({
       <tbody>
         <tr className="Controller-Table-Header">
           <td className="Controller-Table-Body" />
-          {products.map(product => (
+          {products.map((product) => (
             <td className="Controller-Table-Body">
-              {product}
               <button
                 className="Controller-Table-Delete"
                 onClick={deleteProduct(product)}
@@ -191,13 +190,7 @@ const ControllerTable = ({
                 className="Controller-Table-Update"
                 type="text"
                 value={product}
-                onFocus={e => {
-                  e.target.style.opacity = "1";
-                }}
-                onBlur={e => {
-                  updateProduct(product)(e);
-                  e.target.style.opacity = "0";
-                }}
+                onBlur={updateProduct(product)}
               />
             </td>
           ))}
@@ -222,7 +215,7 @@ const ControllerTable = ({
           >
             Image
           </td>
-          {products.map(product => (
+          {products.map((product) => (
             <td key={product} className="Controller-Table-Body">
               <label
                 className="Controller-Table-Image"
@@ -242,13 +235,12 @@ const ControllerTable = ({
             </td>
           ))}
         </tr>
-        {amounts.map(amount => (
+        {amounts.map((amount) => (
           <tr key={amount.category}>
             <td
               className="Controller-Table-Body"
               style={{ background: "#C7C7C7" }}
             >
-              {amount.category}
               <button
                 className="Controller-Table-Delete"
                 onClick={deleteCategory(amount.category)}
@@ -256,31 +248,19 @@ const ControllerTable = ({
                 X
               </button>
               <input
+                className="Controller-Table-Update"
                 type="text"
                 value={amount.category}
-                onFocus={e => {
-                  e.target.style.opacity = "1";
-                }}
-                onBlur={e => {
-                  updateCategory(amount.category)(e);
-                  e.target.style.opacity = "0";
-                }}
+                onBlur={updateCategory(amount.category)}
               />
             </td>
-            {products.map(product => (
+            {products.map((product) => (
               <td key={product} className="Controller-Table-Body">
-                {amount.value[product] ?? 0}
                 <input
                   className="Controller-Table-Update"
                   type="text"
                   value={amount.value[product] ?? 0}
-                  onFocus={e => {
-                    e.target.style.opacity = "1";
-                  }}
-                  onBlur={e => {
-                    updateData(amount.category, product)(e);
-                    e.target.style.opacity = "0";
-                  }}
+                  onBlur={updateData(amount.category, product)}
                 />
               </td>
             ))}

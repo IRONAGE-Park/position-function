@@ -11,7 +11,7 @@ const ControllerPreset = ({ onUpdateDate }: ControllerPresetProps) => {
 
   return (
     <ul className="Controller-Preset">
-      {presets.map(preset => (
+      {presets.map((preset) => (
         <li
           className="Controller-Preset-Element"
           key={preset.name}

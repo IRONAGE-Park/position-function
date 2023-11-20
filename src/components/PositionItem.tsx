@@ -7,6 +7,7 @@ const PositionItem = ({ image, product, x, y }: PositionElement) => {
         top: `${y}%`,
         backgroundImage: `url(${image})`,
       }}
+      onError={console.log}
     >
       {image ? "" : product}
     </div>

@@ -26,11 +26,18 @@ const Controller = ({ products, data, onUpdateDate }: ControllerProps) => {
         {isSlide ? "▲" : "▼"}
       </span>
       <ControllerPreset onUpdateDate={onUpdateDate} />
-      <ControllerTable
-        products={products}
-        data={data}
-        onUpdateDate={onUpdateDate}
-      />
+      <section
+        style={{
+          width: "100%",
+          overflow: "auto",
+        }}
+      >
+        <ControllerTable
+          products={products}
+          data={data}
+          onUpdateDate={onUpdateDate}
+        />
+      </section>
     </div>
   );
 };

@@ -72,10 +72,6 @@
 .Controller-Table-Add:hover > .Controller-Table-Addition { width: 30px; padding: 10px; }
 .Controller-Table-Body:hover > .Controller-Table-Delete {display:inline;}
 .Controller-Table-Update {
-    position: absolute;
-    /* left: 50%; transform:translateX(-50%); */
-    left:0; right:0; margin: auto;
-    width: 90%;
 }
 .Controller-Table-Delete {
     position: absolute;
